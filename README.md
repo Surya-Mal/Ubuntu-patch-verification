@@ -1,5 +1,5 @@
 # Ubuntu-patch-verification
-This is the source code and setup/running steps that were used for the CS 6348 final project: "Using Gray-Box Fuzzing to Confirm Bug Fixes Between Linux Versions"
+This is the source code and setup/running steps that were used for the CS 6348 final project: "Using Gray-Box Fuzzing to Confirm Bug Fixes Between Linux Versions" (Ubuntu 20.04 vs Ubuntu 22.04)
 
 # Docker and AFL fuzzing Set up Steps
 **These steps were done in the WSL terminal (Ubuntu) for performance and compatability sake**
