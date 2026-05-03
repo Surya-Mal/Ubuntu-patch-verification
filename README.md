@@ -19,13 +19,13 @@ This is the source code and setup/running steps that were used for the CS 6348 f
 4. ```docker run -dit --network fuzz-net --name aflplusplus aflplusplus/aflplusplus```
 
 ### Verifying connection
-1. docker exec -it aflplusplus bash
+1. ```docker exec -it aflplusplus bash```
 	1. Will run the aflplusplus bash terminal
-2. apt-get update && apt-get install -y iputils-ping
+2. ```apt-get update && apt-get install -y iputils-ping```
 	1. Installs the linux ping feature which sends network packets to a machine to see if its alive
 	2. If you see ?bytes from ubuntu then that means your able to communicate
-3. ping ubuntu2004
-4. ping ubuntu2204
+3. ```ping ubuntu2004```
+4. ```ping ubuntu2204```
 
 ## Setting up the environment
 - Remove the old container that were used for network testing:
@@ -56,10 +56,10 @@ docker network inspect fuzz-net
 ```
 
 ### Installs (for the 2 ubuntu containers)
-- apt-get update (for both ubuntu containers)
+- ```apt-get update``` (for both ubuntu containers)
 	- Each ubuntu version will have its own cli tool versions especially with ubuntu 20.04 having older versions
 	- *This will allow testing grep and tar cli tools*
-- apt-get update && apt-get install -y binutils
+- ```apt-get update && apt-get install -y binutils```
 	- *Allows testing the bintutils*
 
 ## Making the seed inputs
