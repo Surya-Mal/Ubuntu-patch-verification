@@ -13,10 +13,10 @@ This is the source code and setup/running steps that were used for the CS 6348 f
 3. docker pull aflplusplus/aflplusplus
 
 ### Network setup
-1. docker network create fuzz-net
-2. docker run -dit --network fuzz-net --name ubuntu2004 ubuntu:20.04
-3. docker run -dit --network fuzz-net --name ubuntu2204 ubuntu:22.04
-4. docker run -dit --network fuzz-net --name aflplusplus aflplusplus/aflplusplus
+1. ```docker network create fuzz-net```
+2. ```docker run -dit --network fuzz-net --name ubuntu2004 ubuntu:20.04```
+3. ```docker run -dit --network fuzz-net --name ubuntu2204 ubuntu:22.04```
+4. ```docker run -dit --network fuzz-net --name aflplusplus aflplusplus/aflplusplus```
 
 ### Verifying connection
 1. docker exec -it aflplusplus bash
@@ -64,7 +64,7 @@ docker network inspect fuzz-net
 
 ## Making the seed inputs
 Run the afl++ container **through you wsl terminal**
-	1. Command: docker exec -it aflplusplus bash
+	1. Command: ```docker exec -it aflplusplus bash```
 
 ### Grep
 - Make the seed files, copy the values provided in the seeds/grep directory in the github, and paste them into the respective seed file in the terminal
@@ -73,19 +73,19 @@ Run the afl++ container **through you wsl terminal**
 1. Go to the tmp folder in the terminal
 2. Make 2 files with random contents, ex: testfile.txt, contents: "hello there"
 3. Run this tar command to make a tar file seed:
-	1. tar -cf /fuzzing/seeds/tar/seed1.tar /tmp/testfile.txt
+	1. ```tar -cf /fuzzing/seeds/tar/seed1.tar /tmp/testfile.txt```
 4. To verify it worked use this command and see if there is size amount:
-	1. tar -tvf /fuzzing/seeds/tar/seed1.tar
+	1. ```tar -tvf /fuzzing/seeds/tar/seed1.tar```
 5. This will simulate having a tar file containing 2 files:
-	1. tar -cf /fuzzing/seeds/tar/seed2.tar /tmp/testfile.txt /tmp/testfile2.txt
+	1. ```tar -cf /fuzzing/seeds/tar/seed2.tar /tmp/testfile.txt /tmp/testfile2.txt```
 6. A seed with a more compressed tar file:
-	1. tar -czf /fuzzing/seeds/tar/seed3.tar.gz /tmp/testfile.txt
+	1. ```tar -czf /fuzzing/seeds/tar/seed3.tar.gz /tmp/testfile.txt```
 ### objdump
 - For objdump in binutils, you can copy the binary files from ubuntu bin folder which houses binary files for commands
-1. cp /bin/ls /fuzzing/seeds/objdump/seed1.elf
-2. cp /bin/cp /fuzzing/seeds/objdump/seed2.elf
-3. cp /bin/cat /fuzzing/seeds/objdump/seed3.elf
-4. Verify: ls -la /fuzzing/seeds/objdump/
+1. ```cp /bin/ls /fuzzing/seeds/objdump/seed1.elf```
+2. ```cp /bin/cp /fuzzing/seeds/objdump/seed2.elf```
+3. ```cp /bin/cat /fuzzing/seeds/objdump/seed3.elf```
+4. Verify: ```ls -la /fuzzing/seeds/objdump/```
 
 ## Wrapper scripts
 - These scripts are used to help automate the process of taking the input and running the actual command using them
@@ -95,9 +95,9 @@ Run the afl++ container **through you wsl terminal**
 
 ## Testing if QEMU works
 - This will be checked in the afl++ container
-- Checks is QEMU is there: ls /AFLplusplus/ | grep qemu
+- Checks is QEMU is there: ```ls /AFLplusplus/ | grep qemu```
 - Tests a sample:
-	- afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_test -- objdump -d @@
+	- ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_test -- objdump -d @@```
 
 # Running AFL++ and the Harness
 ## AFL
@@ -106,10 +106,10 @@ Run the afl++ container **through you wsl terminal**
 3. ```docker exec -it aflplusplus bash```
 4. ```tmux new-session -s NAMEOFSESSION``` (change the NAMEOFSESSION to tmux session name)
 5. ```Commands to run AFL++ for each CLI tool```
-  a. Grep Command: ```afl-fuzz -Q -i /fuzzing/seeds/grep -o /fuzzing/output/grep_results -- grep -E -f @@```
-  b. Objdump Command:
-  c. Tar Command:
-6. Detach from the tmux session
+	- Grep Command: ```afl-fuzz -Q -i /fuzzing/seeds/grep -o /fuzzing/output/grep_results -- grep -E -f @@```
+ 	- Objdump Command:
+	- Tar Command:
+7. Detach from the tmux session
 ## Harness
 1. Change the permission of the results folder based on which CLI tool is being tested (to allow harness to read it): ```sudo chmod -R 755 ~/fuzzing-project/output/CLITOOL_results``` (change the "CLITOOL" to either grep, objdump, or tar)
 2. ```tmux new-session -s harness```
