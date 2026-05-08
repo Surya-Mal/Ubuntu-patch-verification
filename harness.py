@@ -12,7 +12,7 @@ from pathlib import Path
 
 CLIENT = docker.from_env()
 CONTAINERS = ("ubuntu2004", "ubuntu2204")
-LOG_PATH = Path("/home/YOURPATH/fuzzing-project/output/divergences.jsonl") # MODIFY THIS LINE BASED ON YOUR OWN PATH TO THE DIVERGENCE FILE
+LOG_PATH = Path("/home/connor/fuzzing-project/output/divergences.jsonl")
 
 
 def run_in_container(name, wrapper, input_path, timeout=15):
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 3 and sys.argv[1] == "watch":
         # python3 harness.py watch <target>
         target = sys.argv[2]
-        queue = str(Path.home() / "fuzzing-project" / "output" / (target + "_results") / "default" / "queue")
+        queue = str(Path.home() / "fuzzing-project" / "output" / target / "default" / "queue")
         watch_queue(target, queue)
     elif len(sys.argv) == 3:
         # python3 harness.py <target> <input_path>
