@@ -108,7 +108,7 @@ Run the afl++ container **through you wsl terminal**
 5. ```Commands to run AFL++ for each CLI tool```
 	- Grep Command: ```afl-fuzz -Q -i /fuzzing/seeds/grep -o /fuzzing/output/grep_results -- grep -E -f @@```
  	- Objdump Command: ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_results -- objdump -d @@ ```
-	- Tar Command:
+	- Tar Command: ```afl-fuzz -Q -i /fuzzing/seeds/tar -o /fuzzing/output/tar_results -- tar -tvf @@```
 7. Detach from the tmux session
 ## Harness
 1. Change the permission of the results folder based on which CLI tool is being tested (to allow harness to read it): ```sudo chmod -R 755 ~/fuzzing-project/output/CLITOOL_results``` (change the "CLITOOL" to either grep, objdump, or tar)
