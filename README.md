@@ -107,7 +107,7 @@ Run the afl++ container **through you wsl terminal**
 4. ```tmux new-session -s NAMEOFSESSION``` (change the NAMEOFSESSION to tmux session name)
 5. ```Commands to run AFL++ for each CLI tool```
 	- Grep Command: ```afl-fuzz -Q -i /fuzzing/seeds/grep -o /fuzzing/output/grep_results -- grep -E -f @@```
- 	- Objdump Command:
+ 	- Objdump Command: ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_results -- objdump -d @@ ```
 	- Tar Command:
 7. Detach from the tmux session
 ## Harness
