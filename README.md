@@ -100,7 +100,7 @@ Run the afl++ container **through you wsl terminal**
 	- ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_test -- objdump -d @@```
 
 ## Setting up the Harness
-1. In the "scripts" folder of the github, download or copy the contents of harness.py into the fuzzing-project directory (user terminal not inside of AFL++ docker container)
+1. In the github, download or copy the contents of harness.py into the fuzzing-project directory (user terminal not inside of AFL++ docker container)
 2. In the harness at this line : ``` LOG_PATH = Path("/home/YOURPATH/fuzzing-project/output/divergences.jsonl") ``` change the path ("YOURPATH") to point to divergences.jsonl based on your setup path
 
 # Running AFL++ and the Harness
