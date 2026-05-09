@@ -99,17 +99,20 @@ Run the afl++ container **through you wsl terminal**
 - Tests a sample:
 	- ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_test -- objdump -d @@```
 
+## Setting up the Harness
+1. In the "scripts" folder of the github, download or copy the contents of harness.py into the fuzzing-project directory (user terminal not inside of AFL++ docker container)
+2. In the harness at this line : ``` LOG_PATH = Path("/home/YOURPATH/fuzzing-project/output/divergences.jsonl") ``` change the path ("YOURPATH") to point to divergences.jsonl based on your setup path
+
 # Running AFL++ and the Harness
 ## AFL
-1. In the harness at this line : ``` LOG_PATH = Path("/home/YOURPATH/fuzzing-project/output/divergences.jsonl") ``` change the path ("YOURPATH") to point to divergences.jsonl based on your setup path
-2. ```docker start ubuntu2004 ubuntu2204 aflplusplus```
-3. ```docker exec -it aflplusplus bash```
-4. ```tmux new-session -s NAMEOFSESSION``` (change the NAMEOFSESSION to tmux session name)
-5. ```Commands to run AFL++ for each CLI tool```
+1. ```docker start ubuntu2004 ubuntu2204 aflplusplus```
+2. ```docker exec -it aflplusplus bash```
+3. ```tmux new-session -s NAMEOFSESSION``` (change the NAMEOFSESSION to tmux session name)
+4. ```Commands to run AFL++ for each CLI tool```
 	- Grep Command: ```afl-fuzz -Q -i /fuzzing/seeds/grep -o /fuzzing/output/grep_results -- grep -E -f @@```
  	- Objdump Command: ```afl-fuzz -Q -i /fuzzing/seeds/objdump -o /fuzzing/output/objdump_results -- objdump -d @@ ```
 	- Tar Command: ```afl-fuzz -Q -i /fuzzing/seeds/tar -o /fuzzing/output/tar_results -- tar -tvf @@```
-7. Detach from the tmux session
+5. Detach from the tmux session
 ## Harness
 1. Change the permission of the results folder based on which CLI tool is being tested (to allow harness to read it): ```sudo chmod -R 755 ~/fuzzing-project/output/CLITOOL_results``` (change the "CLITOOL" to either grep, objdump, or tar)
 2. ```tmux new-session -s harness```
